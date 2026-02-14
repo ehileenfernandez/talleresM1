@@ -101,6 +101,7 @@ function mostarDashboard(){
 function mostarLogin(){
     document.querySelector("#loginSection").style.display ="flex";
     document.querySelector("#btnEntrar").style.display ="block";
+    document.querySelector("#mainContent").style.display ="none";
     document.querySelector("#dashboard").style.display ="none";
     document.querySelector("#btnSalir").style.display ="none";
     document.querySelector("#btnAgregar").style.display ="none";
