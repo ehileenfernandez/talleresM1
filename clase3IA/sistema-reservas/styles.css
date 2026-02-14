@@ -1,0 +1,553 @@
+/* ===========================
+   ESTILOS GENERALES
+   =========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+/* ===========================
+   PANTALLA DE LOGIN
+   =========================== */
+#loginScreen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+}
+
+#loginScreen .card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+#loginScreen .card-header {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+#loginScreen .card-header h3 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+#loginScreen .card-body {
+    padding: 2rem;
+}
+
+#loginScreen .form-control,
+#loginScreen .form-select {
+    font-size: 0.95rem;
+    padding: 0.65rem 0.75rem;
+}
+
+#loginScreen .form-label {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+}
+
+#loginScreen .btn {
+    padding: 0.65rem 1.5rem;
+    font-size: 1rem;
+}
+
+#loginScreen .nav-tabs {
+    margin-bottom: 1.5rem;
+}
+
+#loginScreen small {
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+/* ===========================
+   PANTALLA PRINCIPAL
+   =========================== */
+#mainScreen {
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* ===========================
+   CARDS Y CONTENEDORES
+   =========================== */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 2px solid #f0f0f0;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+}
+
+.card-header h5 {
+    margin: 0;
+    color: #333;
+}
+
+/* ===========================
+   ESTADÍSTICAS
+   =========================== */
+.stat-card {
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.stat-card:hover {
+    transform: scale(1.05);
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.stat-item:last-child {
+    border-bottom: none;
+}
+
+.stat-item h3 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+    color: #667eea;
+}
+
+.stat-item p {
+    margin: 0.5rem 0 0 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.stat-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* ===========================
+   BADGES DE ESTADO
+   =========================== */
+.badge {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-pendiente {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.status-confirmada {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.status-cancelada {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.status-completada {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+/* ===========================
+   TABLAS
+   =========================== */
+.table {
+    margin-bottom: 0;
+}
+
+.table thead {
+    background-color: #f8f9fa;
+}
+
+.table thead th {
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: #495057;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* ===========================
+   BOTONES
+   =========================== */
+.btn {
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-sm {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.btn-group-sm .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+/* ===========================
+   FORMULARIOS
+   =========================== */
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    padding: 0.75rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+/* ===========================
+   TABS
+   =========================== */
+.nav-tabs .nav-link {
+    border: none;
+    color: #666;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.nav-tabs .nav-link:hover {
+    color: #667eea;
+}
+
+.nav-tabs .nav-link.active {
+    color: #667eea;
+    background-color: transparent;
+    border-bottom: 3px solid #667eea;
+}
+
+/* ===========================
+   AGENDA DIARIA
+   =========================== */
+.agenda-item {
+    background-color: #fff;
+    border-left: 4px solid #667eea;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.3s;
+}
+
+.agenda-item:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateX(5px);
+}
+
+.agenda-item.status-pendiente {
+    border-left-color: #ffc107;
+}
+
+.agenda-item.status-confirmada {
+    border-left-color: #28a745;
+}
+
+.agenda-item.status-cancelada {
+    border-left-color: #dc3545;
+}
+
+.agenda-time {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.agenda-service {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0.5rem 0;
+}
+
+.agenda-client {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* ===========================
+   LISTA DE RESERVAS
+   =========================== */
+.reservation-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+}
+
+.reservation-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+}
+
+.reservation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.reservation-service {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.reservation-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+}
+
+.detail-item i {
+    color: #667eea;
+}
+
+.reservation-notes {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* ===========================
+   ALERTAS Y MENSAJES
+   =========================== */
+.alert {
+    border: none;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+}
+
+/* ===========================
+   ANIMACIONES
+   =========================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.view-container {
+    animation: fadeIn 0.3s ease;
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+@media (max-width: 768px) {
+    #loginScreen .card {
+        margin: 10px;
+    }
+    
+    #loginScreen .card-body {
+        padding: 1.5rem;
+    }
+    
+    #loginScreen .card-header {
+        padding: 1.25rem;
+    }
+    
+    #loginScreen .card-header h3 {
+        font-size: 1.25rem;
+    }
+    
+    .stat-item h3 {
+        font-size: 2rem;
+    }
+    
+    .reservation-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .table-responsive {
+        font-size: 0.85rem;
+    }
+    
+    .btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1rem;
+    }
+    
+    .container-fluid {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    #loginScreen {
+        padding: 10px 0;
+    }
+    
+    #loginScreen .card {
+        border-radius: 10px;
+    }
+    
+    #loginScreen .card-body {
+        padding: 1rem;
+    }
+    
+    #loginScreen .card-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .form-control, .form-select {
+        font-size: 0.9rem;
+    }
+    
+    .stat-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* ===========================
+   UTILIDADES
+   =========================== */
+.d-none {
+    display: none !important;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* ===========================
+   MODAL
+   =========================== */
+.modal-content {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px 15px 0 0;
+}
+
+.modal-header .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+/* ===========================
+   SCROLLBAR PERSONALIZADA
+   =========================== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5568d3;
+}
+
+/* ===========================
+   EMPTY STATE
+   =========================== */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: #999;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.3;
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+    margin: 0;
+}

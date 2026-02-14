@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Reservas Empresarial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Pantalla de Login -->
+    <div id="loginScreen" class="container">
+        <div class="row justify-content-center w-100">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h3><i class="bi bi-calendar-check"></i> Sistema de Reservas</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Tabs para Login y Registro -->
+                        <ul class="nav nav-tabs mb-3" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="login-tab" data-bs-toggle="tab" 
+                                    data-bs-target="#login" type="button">Iniciar Sesión</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="register-tab" data-bs-toggle="tab" 
+                                    data-bs-target="#register" type="button">Registrarse</button>
+                            </li>
+                        </ul>
+                        
+                        <div class="tab-content">
+                            <!-- Formulario de Login -->
+                            <div class="tab-pane fade show active" id="login" role="tabpanel">
+                                <form id="loginForm">
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="loginEmail" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Contraseña</label>
+                                        <input type="password" class="form-control" id="loginPassword" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                                </form>
+                                <div class="mt-3 p-3 bg-light rounded">
+                                    <small class="text-muted">
+                                        <strong>Usuarios de prueba:</strong><br>
+                                        <strong>Admin:</strong> admin@empresa.com / admin123<br>
+                                        <strong>Operador:</strong> operador@empresa.com / oper123<br>
+                                        <strong>Cliente:</strong> cliente@test.com / cliente123
+                                    </small>
+                                </div>
+                            </div>
+                            
+                            <!-- Formulario de Registro -->
+                            <div class="tab-pane fade" id="register" role="tabpanel">
+                                <form id="registerForm">
+                                    <div class="mb-3">
+                                        <label class="form-label">Nombre Completo</label>
+                                        <input type="text" class="form-control" id="registerName" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="registerEmail" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Teléfono</label>
+                                        <input type="tel" class="form-control" id="registerPhone" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Contraseña</label>
+                                        <input type="password" class="form-control" id="registerPassword" required minlength="6">
+                                        <small class="text-muted">Mínimo 6 caracteres</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Confirmar Contraseña</label>
+                                        <input type="password" class="form-control" id="registerPasswordConfirm" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-success w-100">Registrarse</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla Principal del Sistema -->
+    <div id="mainScreen" class="d-none">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><i class="bi bi-calendar-check"></i> Sistema de Reservas</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto" id="navMenu">
+                        <!-- Se llenará dinámicamente según el rol -->
+                    </ul>
+                    <div class="navbar-nav">
+                        <span class="navbar-text me-3">
+                            <i class="bi bi-person-circle"></i> <span id="currentUserName"></span>
+                        </span>
+                        <button class="btn btn-outline-light btn-sm" id="logoutBtn">
+                            <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Contenedor de Vistas -->
+        <div class="container-fluid mt-4">
+            <!-- Vista: Dashboard Cliente -->
+            <div id="clientDashboard" class="view-container d-none">
+                <h2><i class="bi bi-house-door"></i> Mi Panel</h2>
+                <div class="row mt-4">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5>Mis Reservas</h5>
+                                <button class="btn btn-primary btn-sm" data-view="newReservation">
+                                    <i class="bi bi-plus-circle"></i> Nueva Reserva
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div id="clientReservationsList"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Estadísticas</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="stat-item">
+                                    <h3 id="clientTotalReservations">0</h3>
+                                    <p>Total de Reservas</p>
+                                </div>
+                                <div class="stat-item">
+                                    <h3 id="clientPendingReservations">0</h3>
+                                    <p>Pendientes</p>
+                                </div>
+                                <div class="stat-item">
+                                    <h3 id="clientConfirmedReservations">0</h3>
+                                    <p>Confirmadas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Nueva Reserva -->
+            <div id="newReservation" class="view-container d-none">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="bi bi-calendar-plus"></i> Nueva Reserva</h5>
+                            </div>
+                            <div class="card-body">
+                                <form id="newReservationForm">
+                                    <div class="mb-3">
+                                        <label class="form-label">Servicio</label>
+                                        <select class="form-select" id="serviceSelect" required>
+                                            <option value="">Seleccione un servicio...</option>
+                                            <option value="Consultoría">Consultoría Empresarial</option>
+                                            <option value="Capacitación">Capacitación</option>
+                                            <option value="Auditoría">Auditoría</option>
+                                            <option value="Soporte Técnico">Soporte Técnico</option>
+                                            <option value="Mantenimiento">Mantenimiento</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Fecha</label>
+                                        <input type="date" class="form-control" id="reservationDate" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Hora</label>
+                                        <input type="time" class="form-control" id="reservationTime" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Descripción / Notas</label>
+                                        <textarea class="form-control" id="reservationNotes" rows="3" 
+                                            placeholder="Describa los detalles de su reserva..."></textarea>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-check-circle"></i> Crear Reserva
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" data-view="clientDashboard">
+                                            <i class="bi bi-x-circle"></i> Cancelar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Panel Administrador -->
+            <div id="adminDashboard" class="view-container d-none">
+                <h2><i class="bi bi-speedometer2"></i> Panel de Administración</h2>
+                
+                <!-- Filtros -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="form-label">Estado</label>
+                                <select class="form-select" id="adminFilterStatus">
+                                    <option value="">Todos</option>
+                                    <option value="pendiente">Pendiente</option>
+                                    <option value="confirmada">Confirmada</option>
+                                    <option value="cancelada">Cancelada</option>
+                                    <option value="completada">Completada</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Fecha Desde</label>
+                                <input type="date" class="form-control" id="adminFilterDateFrom">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Fecha Hasta</label>
+                                <input type="date" class="form-control" id="adminFilterDateTo">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">&nbsp;</label>
+                                <button class="btn btn-primary w-100" id="adminApplyFilters">
+                                    <i class="bi bi-funnel"></i> Aplicar Filtros
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de Reservas -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Todas las Reservas</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Cliente</th>
+                                        <th>Servicio</th>
+                                        <th>Fecha</th>
+                                        <th>Hora</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminReservationsTable">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Estadísticas Administrador -->
+            <div id="adminStats" class="view-container d-none">
+                <h2><i class="bi bi-bar-chart"></i> Estadísticas del Sistema</h2>
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <div class="card text-center stat-card">
+                            <div class="card-body">
+                                <i class="bi bi-calendar-check stat-icon text-primary"></i>
+                                <h3 id="statTotalReservations">0</h3>
+                                <p>Total Reservas</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center stat-card">
+                            <div class="card-body">
+                                <i class="bi bi-clock-history stat-icon text-warning"></i>
+                                <h3 id="statPendingReservations">0</h3>
+                                <p>Pendientes</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center stat-card">
+                            <div class="card-body">
+                                <i class="bi bi-check-circle stat-icon text-success"></i>
+                                <h3 id="statConfirmedReservations">0</h3>
+                                <p>Confirmadas</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center stat-card">
+                            <div class="card-body">
+                                <i class="bi bi-people stat-icon text-info"></i>
+                                <h3 id="statTotalUsers">0</h3>
+                                <p>Usuarios</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Reservas por Estado</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="statusChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Servicios Más Solicitados</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="servicesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Gestión de Usuarios (Admin) -->
+            <div id="userManagement" class="view-container d-none">
+                <h2><i class="bi bi-people"></i> Gestión de Usuarios</h2>
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Email</th>
+                                        <th>Teléfono</th>
+                                        <th>Rol</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTable">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Panel Operador -->
+            <div id="operatorDashboard" class="view-container d-none">
+                <h2><i class="bi bi-clipboard-check"></i> Panel de Operador</h2>
+                
+                <!-- Agenda Diaria -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5><i class="bi bi-calendar-day"></i> Agenda del Día</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Seleccionar Fecha</label>
+                            <input type="date" class="form-control" id="operatorDateFilter">
+                        </div>
+                        <div id="dailyAgenda"></div>
+                    </div>
+                </div>
+
+                <!-- Reservas Pendientes -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Reservas Pendientes de Confirmación</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Servicio</th>
+                                        <th>Fecha</th>
+                                        <th>Hora</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="operatorReservationsTable">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Reserva -->
+    <div class="modal fade" id="editReservationModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Reserva</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editReservationForm">
+                        <input type="hidden" id="editReservationId">
+                        <div class="mb-3">
+                            <label class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="editReservationDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Hora</label>
+                            <input type="time" class="form-control" id="editReservationTime" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Estado</label>
+                            <select class="form-select" id="editReservationStatus">
+                                <option value="pendiente">Pendiente</option>
+                                <option value="confirmada">Confirmada</option>
+                                <option value="cancelada">Cancelada</option>
+                                <option value="completada">Completada</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="saveReservationChanges">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
